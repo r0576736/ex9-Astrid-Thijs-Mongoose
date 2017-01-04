@@ -5,14 +5,14 @@
  */
 
 var mongoose = require("mongoose");
-var AlarmsSchema = mongoose.Schema({
+var AlarmsSchema = mongoose.Schema({                                            //schema inladen in mongoose
             ID: {
                 type: Number,
                 required: true,
                 unique: true
             },
             
-            name_drone: {
+            name_drone: {                                                       //alle nodige velden met hun type
                 type: String 
             },
  
@@ -41,21 +41,21 @@ var AlarmsSchema = mongoose.Schema({
             }
 });
 
-var Alarm = module.exports = mongoose.model('Alarm', AlarmsSchema);
+var Alarm = module.exports = mongoose.model('Alarm', AlarmsSchema);             //variabele 'alarm' maken die we kunnen inladen in mongoose model
 
 module.exports = {
-    saveAlarms: function (Alarm, callback) {
+    saveAlarms: function (Alarm, callback) {                                    //alarm opslagen in 'Alarms'
         Alarm.create(Alarm, callback);
 
     },
-
-    AllAlarms : function(callback) {
+    
+    AllAlarms : function(callback) {                                            //lijst met alle alarmen opvragen van 'Alarms'
         Alarm.find(callback);
     },
 
-    findAlarms : function(id, callback){
+    findAlarms : function(id, callback){                                        //alarm opzoeken met id in 'Alarms'
         Alarm.find({alarmid:id}, callback);
     }
 };
 
-console.log("Storage Alarms check");
+console.log("Storage Alarms check");                                            //check storage 'Alarms'
