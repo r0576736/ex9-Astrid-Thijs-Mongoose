@@ -37,7 +37,7 @@ module.exports = {
     },
 
     AllDevices : function(callback) {                                           //lijst met alle toestellen opvragen van 'Devices'
-        Device.find(callback);
+        Devices.find(callback);
     },
 
     findDevice : function(id, callback){                                       //toestel opzoeken via id in 'Devices'
