@@ -13,15 +13,20 @@ mongoose.connect('mongodb://localhost:27017/API'); //Databank dat je raadpleegt 
 
 // onze lokale 'datastore'. deze variable bewaart onze state.
 var dalDevice = require('./StorageDevices.js');
-var validationDevices = require('./ValidateDevices.js');
+var validateDevices = require('./ValidateDevices.js');
 
+var dalAlarm = require('./StorageAlarms.js');
+var validateAlarms = require('./ValidateAlarms.js');
 
 // aanmaken van de webserver variabele
 var app = express();
 // automatische json-body parsers van request MET media-type application/json gespecifieerd in de request.
 app.use(parser.json());
 
-// opvangen van een GET op /locaties
+
+
+//Devices
+
 app.get('/Devices', function (request, response) {
     dalDevice.AllDevices(function (err, device) {
         if(err){
@@ -48,25 +53,13 @@ app.post("/Devices", function(request, response) {
     // deze is enkel opgevuld indien het JSON is.
     var Device = request.body;
     // Valideren dat velden bestaan
-    var errors = validationDevices.fieldsNotEmpty(Device, "mac_address_device", "time_captured", "distance");
+    var errors = validateDevices.fieldsNotEmpty(Device, "mac_address_device", "time_captured", "distance");
     if (errors) {
         response.status(400).send({
             message: "Following field(s) are mandatory:" + errors.concat()
         });
         return;
     }
-    /*
-    Valideren:
-    var existingDevice = dal.findDevice(Device.mac_address_device);
-    if (existingDevice) {
-        response.status(409).send({
-            message: "mac_address_device moet uniek zijn!",
-            link: "../Devices/" + existingdevice.id
-        });
-        return;
-    }
-    --Dit hoeft niet meer omdat we met moongoose zeggen dat ze uniek of niet uniek moeten zijn--
-    */
     
     dalDevice.saveDevices(Device, function(err, device) {
         if(err){
@@ -80,7 +73,7 @@ app.post("/Devices", function(request, response) {
 app.put("/Devices/:id", function (request, response) {
     var Device = request.body;
     // Valideren dat velden bestaan
-    var errors = validationDevices.fieldsNotEmpty(Device, "mac_address_device", "time_captured", "distance");
+    var errors = validateDevices.fieldsNotEmpty(Device, "mac_address_device", "time_captured", "distance");
     if (errors) {
         response.status(400).send({
             message: "Following field(s) are mandatory:" + errors.concat()
@@ -96,6 +89,51 @@ app.put("/Devices/:id", function (request, response) {
     });
 });
 
+
+
+
+//Alarms
+
+app.get('/Alarms', function (request, response) {
+    dalAlarm.AllAlarms(function (err, Alarm) {
+        if(err){
+            throw err;
+        }
+        response.send(Alarm);
+    });
+});
+
+// opvangen van een GET op /bewegingen/:bewegingid
+app.get('/Alarms/:id', function (request, response) {
+    dalAlarm.findAlarms(request.params.id, function (err, Alarm) {
+        if (Alarm) {
+        response.send(Alarm);
+    } else {
+        err;
+    }
+    });
+});
+
+// opvangen van een POST op /bewegingen.
+app.post("/Alarms", function(request, response) {
+    // de data in de body wordt toegekend aan onze locatie variabele.
+    // deze is enkel opgevuld indien het JSON is.
+    var Alarm = request.body;
+    // Valideren dat velden bestaan
+    var errors = validateAlarms.fieldsNotEmpty(Alarm, "name_drone", "location", "type_alarm", "time_alarm", "notification", "type_notification", "important_alarm");
+    if (errors) {
+        response.status(400).send({
+             message: "Following field(s) are mandatory:" + errors.concat()
+        });
+        return;
+    }
+    dalAlarm.saveAlarms(Alarm, function(err, Alarm) {
+        if(err){
+            throw err;
+        }
+        response.send(Alarm);
+    });
+});
 
 app.listen(12345);
 console.log("Check");
