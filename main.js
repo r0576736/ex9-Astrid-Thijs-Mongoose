@@ -5,7 +5,7 @@ var express = require('express');                                               
 var parser = require('body-parser');                                            //body uitlezen
 var mongoose = require('mongoose');                                             //mongoose -- gekeken van Jelle Van Loock
 
-mongoose.connect('mongodb://localhost:27017/API');                              //databank dat je raadpleegt in Robomongo
+mongoose.connect('mongodb://localhost:27017/API');                              //databank dat je raadpleegt in mongoose/robomongo
 
                                                                                 
 var dalDevice = require('./StorageDevices.js');                                 //locale datastore 'Devices'
@@ -173,4 +173,4 @@ app.post("/WhiteLists", function(request, response) {                           
 
 
 app.listen(12345);                                                              //server start op http://localhost:12345
-console.log("Check");                                                           //checken
+console.log("API Check");                                                           //checken
