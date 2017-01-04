@@ -29,7 +29,7 @@ app.use(parser.json());                                                         
 app.get('/Devices', function (request, response) {                              //toestellen opvragen van datastore 'Devices' met methode GET
     dalDevice.AllDevices(function (error, device) {
         if(error){
-            throw errpr;                                                        //als het toestel niet bestaat, komt er een error 
+            throw error;                                                        //als het toestel niet bestaat, komt er een error 
         }
         response.send(device);                                                  //toestel weergeven wanneer het bestaat
     });
@@ -37,7 +37,7 @@ app.get('/Devices', function (request, response) {                              
 
 
 app.get('/Devices/:id', function (request, response) {                          //toestel opvragen aan de hand van de id met methode GET/:id
-    dalDevice.findDevices(request.params.id, function (error, Device) {           //parameter id meegeven
+    dalDevice.findDevice(request.params.id, function (error, Device) {           //parameter id meegeven
         if (Device) {   
         response.send(Device);                                                  //bestaat de id, toestel weergeven
     } else {
@@ -58,7 +58,7 @@ app.post("/Devices", function(request, response) {                              
         return;                 
     }
     
-    dalDevice.saveDevices(Device, function(error, device) {                       //Toestel opslagen aan de device lijst
+    dalDevice.saveDevice(Device, function(error, device) {                       //Toestel opslagen aan de device lijst
         if(error){
             throw error;                                                          //als er iets mis gaat, error
         }
@@ -101,7 +101,7 @@ app.get('/Alarms', function (request, response) {                               
 
 
 app.get('/Alarms/:id', function (request, response) {                           //alarm met bepaalde id opvragen met methode GET/:id
-    dalAlarm.findAlarms(request.params.id, function (error, Alarm) {            //id opzoeken in de datastore 'Alarms', id megeven als parameter
+    dalAlarm.findAlarm(request.params.id, function (error, Alarm) {            //id opzoeken in de datastore 'Alarms', id megeven als parameter
         if (Alarm) {
         response.send(Alarm);                                                   //id gevonden, alarm weergeven met specificaties
     } else {
@@ -113,7 +113,6 @@ app.get('/Alarms/:id', function (request, response) {                           
 
 app.post("/Alarms", function(request, response) {                               //alarm toevoegen aan de lijst met methode POST
     var Alarm = request.body;                                                   //data toekennen aan body in json formaat
-    // Valideren dat velden bestaan
     var errors = validateAlarms.fieldsNotEmpty(Alarm, "name_drone", "location", "type_alarm", "time_alarm", "notification", "type_notification", "important_alarm");    //data valideren
     if (errors) {
         response.status(400).send({     
@@ -121,7 +120,7 @@ app.post("/Alarms", function(request, response) {                               
         });
         return;             
     }
-    dalAlarm.saveAlarms(Alarm, function(error, Alarm) {                         //alarm opslagen in datastore 'Alarms'
+    dalAlarm.saveAlarm(Alarm, function(error, Alarm) {                         //alarm opslagen in datastore 'Alarms'
         if(error){
             throw error;                                                        //gaat er iets mis, error
         }
@@ -144,7 +143,7 @@ app.get('/WhiteLists', function (request, response) {                           
 
 
 app.get('/WhiteLists/:id', function (request, response) {                       //record van WhiteList opvragen met bepaalde id - met methode GET/:id
-    dalAlarm.findWhiteLists(request.params.id, function (error, WhiteList) {    //id opzoeken in de datastore 'WhiteLists', id megeven als parameter
+    dalAlarm.findWhiteList(request.params.id, function (error, WhiteList) {    //id opzoeken in de datastore 'WhiteLists', id megeven als parameter
         if (WhiteList) {
         response.send(WhiteList);                                               //gevonden, record weergeven
     } else {
@@ -163,7 +162,7 @@ app.post("/WhiteLists", function(request, response) {                           
         });
         return;         
     }
-    dalWhiteList.saveWhiteLists(WhiteList, function(err, WhiteList) {           //recode opslagen in WhiteLists
+    dalWhiteList.saveWhiteList(WhiteList, function(err, WhiteList) {           //recode opslagen in WhiteLists
         if(err){
             throw err;                                                          //gaat er iets mis, error
         }
