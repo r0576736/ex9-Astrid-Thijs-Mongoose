@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-    fieldsNotEmpty: function (object) {
+    fieldsNotEmpty: function (object) {                                         //deze velden mogen niet leeg zijn
         "WhiteList";
         var errors = [];
         var i = 1;
@@ -33,7 +33,7 @@ module.exports = {
 
 };
 
-console.log("Validate WhiteLists check");
+console.log("Validate WhiteLists check");                                       //validate WhiteLists check
 
 
 
