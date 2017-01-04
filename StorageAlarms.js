@@ -44,7 +44,7 @@ var AlarmsSchema = mongoose.Schema({                                            
 var Alarm = module.exports = mongoose.model('Alarm', AlarmsSchema);             //variabele 'alarm' maken die we kunnen inladen in mongoose model
 
 module.exports = {
-    saveAlarms: function (Alarm, callback) {                                    //alarm opslagen in 'Alarms'
+    saveAlarm: function (Alarm, callback) {                                    //alarm opslagen in 'Alarms'
         Alarm.create(Alarm, callback);
 
     },
@@ -53,7 +53,7 @@ module.exports = {
         Alarm.find(callback);
     },
 
-    findAlarms : function(id, callback){                                        //alarm opzoeken met id in 'Alarms'
+    findAlarm : function(id, callback){                                        //alarm opzoeken met id in 'Alarms'
         Alarm.find({alarmid:id}, callback);
     }
 };
