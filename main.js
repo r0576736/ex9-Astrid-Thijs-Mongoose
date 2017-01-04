@@ -37,11 +37,11 @@ app.get('/Devices', function (request, response) {                              
 
 
 app.get('/Devices/:id', function (request, response) {                          //toestel opvragen aan de hand van de id met methode GET/:id
-    dalDevice.findDevice(request.params.id, function (error, Device) {           //parameter id meegeven
+    dalDevice.findDevice(request.params.id, function (error, Device) {          //parameter id meegeven
         if (Device) {   
         response.send(Device);                                                  //bestaat de id, toestel weergeven
     } else {
-        error;                                                                    //id bestaat niet, error weergeven
+        error;                                                                  //id bestaat niet, error weergeven
     }
     });
 });
@@ -58,9 +58,9 @@ app.post("/Devices", function(request, response) {                              
         return;                 
     }
     
-    dalDevice.saveDevice(Device, function(error, device) {                       //Toestel opslagen aan de device lijst
+    dalDevice.saveDevice(Device, function(error, device) {                      //Toestel opslagen aan de device lijst
         if(error){
-            throw error;                                                          //als er iets mis gaat, error
+            throw error;                                                        //als er iets mis gaat, error
         }
         response.send(device);                                                  //nieuwe toestel weergeven
     });
@@ -79,7 +79,7 @@ app.put("/Devices/:id", function (request, response) {                          
 
     dalDevice.updateDevices(request.params.id, Device, function (error, Device) { //toestel updaten in de lijst met toestellen
         if(error){
-            throw error;                                                          //als er iets mis gaat, error
+            throw error;                                                        //als er iets mis gaat, error
         }
         response.send(Device);                                                  //toestel met update(s) weergeven
     });
@@ -101,7 +101,7 @@ app.get('/Alarms', function (request, response) {                               
 
 
 app.get('/Alarms/:id', function (request, response) {                           //alarm met bepaalde id opvragen met methode GET/:id
-    dalAlarm.findAlarm(request.params.id, function (error, Alarm) {            //id opzoeken in de datastore 'Alarms', id megeven als parameter
+    dalAlarm.findAlarm(request.params.id, function (error, Alarm) {             //id opzoeken in de datastore 'Alarms', id megeven als parameter
         if (Alarm) {
         response.send(Alarm);                                                   //id gevonden, alarm weergeven met specificaties
     } else {
@@ -120,7 +120,7 @@ app.post("/Alarms", function(request, response) {                               
         });
         return;             
     }
-    dalAlarm.saveAlarm(Alarm, function(error, Alarm) {                         //alarm opslagen in datastore 'Alarms'
+    dalAlarm.saveAlarm(Alarm, function(error, Alarm) {                          //alarm opslagen in datastore 'Alarms'
         if(error){
             throw error;                                                        //gaat er iets mis, error
         }
@@ -162,7 +162,7 @@ app.post("/WhiteLists", function(request, response) {                           
         });
         return;         
     }
-    dalWhiteList.saveWhiteList(WhiteList, function(err, WhiteList) {           //recode opslagen in WhiteLists
+    dalWhiteList.saveWhiteList(WhiteList, function(err, WhiteList) {            //recode opslagen in WhiteLists
         if(err){
             throw err;                                                          //gaat er iets mis, error
         }
