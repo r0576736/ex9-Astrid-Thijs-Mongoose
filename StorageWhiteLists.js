@@ -32,7 +32,7 @@ var WhiteListsSchema = mongoose.Schema({                                        
 var WhiteList = module.exports = mongoose.model('WhiteList', WhiteListsSchema); //variabele 'WhiteList' maken die we kunnen inladen in mongoose model
 
 module.exports = {
-    saveWhiteLists: function (WhiteList, callback) {                            //record saven in 'WhiteLists'
+    saveWhiteList: function (WhiteList, callback) {                            //record saven in 'WhiteLists'
         WhiteList.create(WhiteList, callback);
 
     },
@@ -41,7 +41,7 @@ module.exports = {
         WhiteList.find(callback);
     },
 
-    findWhiteLists : function(id, callback){                                    //record opzoeken via id in 'WhiteLists'
+    findWhiteList : function(id, callback){                                    //record opzoeken via id in 'WhiteLists'
         WhiteList.find({whitelistid:id}, callback);
     }
 };
