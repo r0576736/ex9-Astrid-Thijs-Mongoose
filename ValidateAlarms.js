@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-    fieldsNotEmpty: function (object) {
+    fieldsNotEmpty: function (object) {                                         //deze velden mogen niet leeg zijn
         "Alarm";
         var errors = [];
         var i = 1;
@@ -45,6 +45,6 @@ module.exports = {
 
 };
 
-console.log("Validate Alarms check");
+console.log("Validate Alarms check");                                           //validate Alarms check
 
 
