@@ -31,7 +31,7 @@ var DevicesSchema = mongoose.Schema({                                           
 var Device = module.exports = mongoose.model('Device', DevicesSchema);          //variabele 'device' maken die we kunnen inladen in mongoose model
 
 module.exports = {
-    saveDevices: function (Device, callback) {                                  //toestel opslagen in 'Devices'
+    saveDevice: function (Device, callback) {                                  //toestel opslagen in 'Devices'
         Device.create(Device, callback);
 
     },
@@ -40,7 +40,7 @@ module.exports = {
         Device.find(callback);
     },
 
-    findDevices : function(id, callback){                                       //toestel opzoeken via id in 'Devices'
+    findDevice : function(id, callback){                                       //toestel opzoeken via id in 'Devices'
         Device.find({deviceid:id}, callback);
     }
 };
