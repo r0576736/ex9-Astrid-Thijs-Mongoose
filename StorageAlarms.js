@@ -50,7 +50,7 @@ module.exports = {
     },
     
     AllAlarms : function(callback) {                                            //lijst met alle alarmen opvragen van 'Alarms'
-        Alarm.find(callback);
+        Alarms.find(callback);
     },
 
     findAlarm : function(id, callback){                                        //alarm opzoeken met id in 'Alarms'
