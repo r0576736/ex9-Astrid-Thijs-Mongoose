@@ -38,7 +38,7 @@ module.exports = {
     },
 
     AllWhiteLists : function(callback) {                                        //gehele lijst opvragen van 'WhiteLists'
-        WhiteList.find(callback);
+        WhiteLists.find(callback);
     },
 
     findWhiteList : function(id, callback){                                    //record opzoeken via id in 'WhiteLists'
