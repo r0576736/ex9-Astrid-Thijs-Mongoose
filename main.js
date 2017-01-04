@@ -18,6 +18,9 @@ var validateDevices = require('./ValidateDevices.js');
 var dalAlarm = require('./StorageAlarms.js');
 var validateAlarms = require('./ValidateAlarms.js');
 
+var dalWhiteList = require('./StorageWhiteLists.js');
+var validateWhiteLists = require('./ValidateWhiteLists.js');
+
 // aanmaken van de webserver variabele
 var app = express();
 // automatische json-body parsers van request MET media-type application/json gespecifieerd in de request.
@@ -134,6 +137,52 @@ app.post("/Alarms", function(request, response) {
         response.send(Alarm);
     });
 });
+
+
+
+//WhiteLists
+
+app.get('/WhiteLists', function (request, response) {
+    dalWhiteList.AllWhiteLists(function (err, WhiteList) {
+        if(err){
+            throw err;
+        }
+        response.send(WhiteList);
+    });
+});
+
+// opvangen van een GET op /bewegingen/:bewegingid
+app.get('/WhiteLists/:id', function (request, response) {
+    dalAlarm.findWhiteLists(request.params.id, function (err, WhiteList) {
+        if (WhiteList) {
+        response.send(WhiteList);
+    } else {
+        err;
+    }
+    });
+});
+
+// opvangen van een POST op /bewegingen.
+app.post("/WhiteLists", function(request, response) {
+    // de data in de body wordt toegekend aan onze locatie variabele.
+    // deze is enkel opgevuld indien het JSON is.
+    var WhiteList = request.body;
+    // Valideren dat velden bestaan
+    var errors = validateWhiteLists.fieldsNotEmpty(WhiteList, "name", "function_person", "mac_address_device", "type_device");
+    if (errors) {
+        response.status(400).send({
+             message: "Following field(s) are mandatory:" + errors.concat()
+        });
+        return;
+    }
+    dalWhiteList.saveWhiteLists(WhiteList, function(err, WhiteList) {
+        if(err){
+            throw err;
+        }
+        response.send(WhiteList);
+    });
+});
+
 
 app.listen(12345);
 console.log("Check");

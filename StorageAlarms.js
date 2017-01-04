@@ -13,7 +13,7 @@ var AlarmsSchema = mongoose.Schema({
             },
             
             name_drone: {
-                type: String, 
+                type: String 
             },
  
             location: {
@@ -25,7 +25,7 @@ var AlarmsSchema = mongoose.Schema({
             },
                         
             time_alarm: {
-                type: String, 
+                type: String 
             },
  
             notification: {
