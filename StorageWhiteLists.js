@@ -5,14 +5,14 @@
  */
 
 var mongoose = require("mongoose");
-var WhiteListsSchema = mongoose.Schema({
+var WhiteListsSchema = mongoose.Schema({                                        //schema inladen in mongoose
             ID: {
                 type: Number,
                 required: true,
                 unique: true
             },
             
-            name: {
+            name: {                                                             //alle nodige velden met hun type
                 type: String 
             },
  
@@ -29,22 +29,22 @@ var WhiteListsSchema = mongoose.Schema({
             }
 });
 
-var WhiteList = module.exports = mongoose.model('WhiteList', WhiteListsSchema);
+var WhiteList = module.exports = mongoose.model('WhiteList', WhiteListsSchema); //variabele 'WhiteList' maken die we kunnen inladen in mongoose model
 
 module.exports = {
-    saveWhiteLists: function (WhiteList, callback) {
+    saveWhiteLists: function (WhiteList, callback) {                            //record saven in 'WhiteLists'
         WhiteList.create(WhiteList, callback);
 
     },
 
-    AllWhiteLists : function(callback) {
+    AllWhiteLists : function(callback) {                                        //gehele lijst opvragen van 'WhiteLists'
         WhiteList.find(callback);
     },
 
-    findWhiteLists : function(id, callback){
+    findWhiteLists : function(id, callback){                                    //record opzoeken via id in 'WhiteLists'
         WhiteList.find({whitelistid:id}, callback);
     }
 };
 
-console.log("Storage WhiteLists check");
+console.log("Storage WhiteLists check");                                        //check storage 'WhiteLists'
 
