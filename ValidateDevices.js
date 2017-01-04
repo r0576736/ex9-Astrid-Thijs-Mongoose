@@ -5,23 +5,23 @@
  */
 
 module.exports = {
-    fieldsNotEmpty: function (object) {
+    fieldsNotEmpty: function (object) {                                         //deze velden mogen niet leeg zijn
         "Device";
         var errors = [];
         var i = 1;
-        if(typeof object["deviceid"] !== "number"){
+        if(typeof object["deviceid"] != "number"){
             errors.push(arguments[i]);
         }
         i++;
-        if(typeof object["mac_address_device"] !== "string"){
+        if(typeof object["mac_address_device"] != "string"){
             errors.push(arguments[i]);
         }
         i++;
-        if(typeof object["time_captured"] !== "string"){
+        if(typeof object["time_captured"] != "string"){
             errors.push(arguments[i]);
         }
         i++;
-        if(typeof object["distance"] !== "number"){
+        if(typeof object["distance"] != "number"){
             errors.push(arguments[i]);
         }
         return errors.length === 0 ? null : errors;
@@ -29,5 +29,5 @@ module.exports = {
 
 };
 
-console.log("Validate Devices check");
+console.log("Validate Devices check");                                          //validate Devices check
 
