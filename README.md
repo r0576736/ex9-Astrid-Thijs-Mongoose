@@ -14,21 +14,21 @@ ValidatieWhiteLists
   
 StorageDevices
   Hierin is het 'Devices' schema voor mongoose verwerkt. 
-    SaveDevices= Toestel opslagen
+    SaveDevice= Toestel opslagen
     AllDevices= Alle toestellen opvragen
-    findDevices= een bepaald toestel opzoeken
+    findDevice= een bepaald toestel opzoeken
 
 StorageAlarms
   Hierin is het 'Alarms' schema voor mongoose verwerkt. 
     SaveAlarm= alarm opslagen
     AllAlarms= lijst met alarmen opvragen
-    findAlarms= een bepaald alarm opzoeken
+    findAlarm= een bepaald alarm opzoeken
 
 StorageWhiteLists
   Hierin is het 'WhiteLists' schema van mongoose verwerkt. 
-    SaveWhiteLists= record opslagen
+    SaveWhiteList= record opslagen
     AllWhiteLists= Alle records opvragen
-    findWhiteLists= een bepaald record opzoeken
+    findWhiteList= een bepaald record opzoeken
 
 Main:
   Alle nodige extenties installeren (express, body-parser, mongoose).
